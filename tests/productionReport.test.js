@@ -27,8 +27,8 @@ test.describe('Production Report - Critical User Flows', () => {
 
         test('should load correct date range from URL parameters', async ({ page }) => {
             // Set URL parameters for date filtering
-            const startDate = '2024-10-28';
-            const endDate = '2024-10-30';
+            const startDate = '2024-10-15';
+            const endDate = '2024-10-26';
 
             await page.goto(`http://localhost:3000?startDate=${startDate}&endDate=${endDate}`);
 
@@ -44,9 +44,9 @@ test.describe('Production Report - Critical User Flows', () => {
             const reportDateHeaderEnder = page.locator('#date-header-Ender');
             const reportDateHeaderPrusa = page.locator('#date-header-Prusa');
 
-            await expect(reportDateHeaderMakerBot).toContainText('Oct 28, 2024 - Oct 30, 2024');
-            await expect(reportDateHeaderEnder).toContainText('Oct 28, 2024 - Oct 30, 2024');
-            await expect(reportDateHeaderPrusa).toContainText('Oct 28, 2024 - Oct 30, 2024');
+            await expect(reportDateHeaderMakerBot).toContainText('Oct 15, 2024 - Oct 26, 2024');
+            await expect(reportDateHeaderEnder).toContainText('Oct 15, 2024 - Oct 26, 2024');
+            await expect(reportDateHeaderPrusa).toContainText('Oct 15, 2024 - Oct 26, 2024');
         });
 
     });
