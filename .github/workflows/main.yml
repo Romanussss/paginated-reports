@@ -1,4 +1,4 @@
-name: main Pipeline
+name: Main Pipeline
 
 on:
   push:
@@ -35,14 +35,14 @@ jobs:
       # Run Playwright tests
       - name: Run Playwright tests
         run: |
-          npx playwright install-deps # This installs necessary dependencies for Playwright
+          npx playwright install-deps # Installs Playwright dependencies
           npx playwright test
         env:
           CI: true
 
       # Generate and upload coverage report
       - name: Upload coverage report
-        if: success() # Only run if the previous steps succeeded
+        if: success() # Only if previous steps succeeded
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
