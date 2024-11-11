@@ -34,12 +34,15 @@ jobs:
 
       # Run Playwright tests
       - name: Run Playwright tests
-        run: npx playwright test
+        run: |
+          npx playwright install-deps # This installs necessary dependencies for Playwright
+          npx playwright test
         env:
           CI: true
 
-      # Generate coverage report
+      # Generate and upload coverage report
       - name: Upload coverage report
+        if: success() # Only run if the previous steps succeeded
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
