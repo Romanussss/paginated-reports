@@ -5,9 +5,10 @@ export default defineConfig({
     test: {
         globals: true,
         environment: 'jsdom',
-        setupFiles: './vitest.setup.ts', // Ensure this path is correct
-        include: ['src/tests/**/*.test.ts'], // Only include Vitest tests
+        setupFiles: './vitest.setup.ts',
+        include: ['src/tests/**/*.test.ts'],
         coverage: {
+            provider: 'v8',
             reporter: ['text', 'json', 'html'],
             exclude: ['node_modules', 'test/'],
         },
