@@ -27,8 +27,7 @@ jobs:
 
       # Run unit tests with coverage report
       - name: Run unit tests
-        run: |
-          npm run test:unit -- --coverage
+        run: npm run test:unit  # No extra --coverage
         env:
           CI: true
 
@@ -42,7 +41,7 @@ jobs:
 
       # Generate and upload coverage report
       - name: Upload coverage report
-        if: success() # Only if previous steps succeeded
+        if: success()
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
