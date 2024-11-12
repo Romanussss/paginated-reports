@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect } = import('@playwright/test');
 
 test.describe('Production Report - Critical User Flows', () => {
 
