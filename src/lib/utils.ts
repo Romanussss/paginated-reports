@@ -1,19 +1,20 @@
-import { clsx, type ClassValue } from "clsx";
 import { isValid, parse, parseISO } from "date-fns";
-import { twMerge } from "tailwind-merge";
 
-export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs));
+export function cn(...classes: string[]) {
+
+    return classes.filter(Boolean).join(' ');
+
 }
 
 export function tryParseDateString(dateStr: string): Date | null {
-    // Check for full ISO 8601 format first to preserve time if provided
-    if (/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(dateStr)) {
-        const isoDate = parseISO(dateStr);
-        if (isValid(isoDate)) return isoDate;
+    // Check if the date string contains a timezone offset (e.g., "2024-10-29 12:30:06.5450270 -05:00")
+    const dateWithTimezone = Date.parse(dateStr);
+    if (!isNaN(dateWithTimezone)) {
+        const parsedDate = new Date(dateWithTimezone);
+        if (isValid(parsedDate)) return new Date(parsedDate.toISOString()); // Ensure UTC
     }
 
-    // Parse using known formats, interpreting dates without time as UTC midnight
+    // Known formats without time information, treated as UTC midnight
     const formats = [
         "yyyy-MM-dd",
         "MM/dd/yyyy",
@@ -29,7 +30,7 @@ export function tryParseDateString(dateStr: string): Date | null {
         }
     }
 
-    // Fallback to parse date as ISO string if possible
+    // Attempt to parse as ISO date string if none of the above formats match
     const fallbackDate = parseISO(dateStr);
     if (isValid(fallbackDate)) return fallbackDate;
 
@@ -43,4 +44,3 @@ export function parseDateString(dateStr: string): Date {
     }
     return parsedDate;
 }
-// test 123 123git 

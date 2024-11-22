@@ -1,4 +1,5 @@
-const { test, expect } = import('@playwright/test');
+import { test, expect } from '@playwright/test';
+
 
 test.describe('Production Report - Critical User Flows', () => {
 
